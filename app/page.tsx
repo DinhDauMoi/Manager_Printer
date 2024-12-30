@@ -2,8 +2,6 @@
 import useSWR from "swr";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { supabase } from "../bases/printer";
-import Printer from "./Printer/page";
-import PrintingInk from "./PrintingInk/page";
 const fetcher = async (key: string) => {
   const { data, error } = await supabase.from(key).select("*");
   if (error) throw new Error(error.message);
