@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Link from "next/link";
 // import "bootstrap/dist/css/bootstrap.min.css";
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,34 +32,34 @@ export default function RootLayout({
       >
         <nav className="navbar bg-dark navbar-expand-lg">
           <div className="container-fluid">
-            <a className="navbar-brand" href="/">
+            <Link className="navbar-brand" href="/">
               <Image
                 src="/images/favicon_fpt.png"
                 alt="logo"
                 width={60}
                 height={60}
               />
-            </a>
+            </Link>
             <div className="navbar-collapse" id="navbarNav">
               <ul className="navbar-nav">
                 <li className="nav-item">
-                  <a
+                  <Link
                     className="nav-link text-white"
                     aria-current="page"
                     href="/"
                   >
                     Trang chủ
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link text-white" href="/Printer">
+                  <Link className="nav-link text-white" href="/Printer">
                     Máy in
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link text-white" href="/PrintingInk">
+                  <Link className="nav-link text-white" href="/PrintingInk">
                     Mực in
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>

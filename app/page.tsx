@@ -10,30 +10,25 @@ const fetcher = async (key: string) => {
 };
 
 const Trang_chu = () => {
-  // Truy vấn bảng "Printer" bằng useSWR
-  //   const { data, error, isLoading } = useSWR("Printer", fetcher);
-
-  //   if (isLoading) return <div>Đang tải dữ liệu...</div>;
-  //   if (error) return <div>Lỗi: {error.message}</div>;
   const {
     data: printers,
     error: printerError,
     isLoading: isPrinterLoading,
   } = useSWR("Printer", fetcher);
-  const {
-    data: inks,
-    error: inkError,
-    isLoading: isInkLoading,
-  } = useSWR("PrintingInk", fetcher);
+  // const {
+  //   data: inks,
+  //   error: inkError,
+  //   isLoading: isInkLoading,
+  // } = useSWR("PrintingInk", fetcher);
 
-  if (isPrinterLoading || isInkLoading) return <div>Đang tải dữ liệu...</div>;
-  if (printerError || inkError)
-    return <div>Lỗi: {printerError?.message || inkError?.message}</div>;
+  if (isPrinterLoading) return <div>Đang tải dữ liệu...</div>;
+  if (printerError)
+    return <div>Lỗi: {printerError?.message}</div>;
 
-  const today = new Date();
-  const formattedDate = `${today.getDate()}/${
-    today.getMonth() + 1
-  }/${today.getFullYear()}`;
+  // const today = new Date();
+  // const formattedDate = `${today.getDate()}/${
+  //   today.getMonth() + 1
+  // }/${today.getFullYear()}`;
   return (
     <>
       <div className="container mt-4">

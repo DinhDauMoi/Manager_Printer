@@ -24,10 +24,10 @@ const Printer = () => {
   if (isPrinterLoading) return <div>Đang tải dữ liệu...</div>;
   if (printerError) return <div>Lỗi: {printerError?.message}</div>;
 
-  const today = new Date();
-  const formattedDate = `${today.getDate()}/${
-    today.getMonth() + 1
-  }/${today.getFullYear()}`;
+//   const today = new Date();
+//   const formattedDate = `${today.getDate()}/${
+//     today.getMonth() + 1
+//   }/${today.getFullYear()}`;
   return (
     <>
       <div className="container">
