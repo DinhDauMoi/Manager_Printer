@@ -1,7 +1,7 @@
 "use client";
 import useSWR from "swr";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { supabase } from "./printer";
+import { supabase } from "../bases/printer";
 
 const fetcher = async (key: string) => {
   const { data, error } = await supabase.from(key).select("*");

@@ -1,7 +1,7 @@
 "use client";
 import useSWR from "swr";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { supabase } from "@/app/printer";
+import { supabase } from "@/bases/printer";
 
 const fetcher = async (key: string) => {
   const { data, error } = await supabase.from(key).select("*");
@@ -22,8 +22,7 @@ const Printer = () => {
   } = useSWR("Printer", fetcher);
 
   if (isPrinterLoading) return <div>Đang tải dữ liệu...</div>;
-  if (printerError)
-    return <div>Lỗi: {printerError?.message}</div>;
+  if (printerError) return <div>Lỗi: {printerError?.message}</div>;
 
   const today = new Date();
   const formattedDate = `${today.getDate()}/${
@@ -60,8 +59,10 @@ const Printer = () => {
                   <td>{printer.Rulo}</td>
                   <td>{printer.Date_test}</td>
                   <td>{printer.Note}</td>
-                      <td>
-                          <button className="btn btn-success"><a>Chi tiết</a></button>
+                  <td>
+                    <button className="btn btn-success">
+                      <a>Chi tiết</a>
+                    </button>
                   </td>
                   {/* <td>{new Date(printer.created_at).toLocaleString()}</td> */}
                 </tr>
