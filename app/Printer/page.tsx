@@ -1,7 +1,7 @@
 "use client";
 import useSWR from "swr";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { supabase } from "./printer";
+import { supabase } from "@/app/printer";
 
 const fetcher = async (key: string) => {
   const { data, error } = await supabase.from(key).select("*");
@@ -9,7 +9,7 @@ const fetcher = async (key: string) => {
   return data;
 };
 
-const Trang_chu = () => {
+const Printer = () => {
   // Truy vấn bảng "Printer" bằng useSWR
   //   const { data, error, isLoading } = useSWR("Printer", fetcher);
 
@@ -20,15 +20,10 @@ const Trang_chu = () => {
     error: printerError,
     isLoading: isPrinterLoading,
   } = useSWR("Printer", fetcher);
-  const {
-    data: inks,
-    error: inkError,
-    isLoading: isInkLoading,
-  } = useSWR("PrintingInk", fetcher);
 
-  if (isPrinterLoading || isInkLoading) return <div>Đang tải dữ liệu...</div>;
-  if (printerError || inkError)
-    return <div>Lỗi: {printerError?.message || inkError?.message}</div>;
+  if (isPrinterLoading) return <div>Đang tải dữ liệu...</div>;
+  if (printerError)
+    return <div>Lỗi: {printerError?.message}</div>;
 
   const today = new Date();
   const formattedDate = `${today.getDate()}/${
@@ -36,8 +31,8 @@ const Trang_chu = () => {
   }/${today.getFullYear()}`;
   return (
     <>
-      <div className="container mt-4">
-        <h3>Danh sách máy in sửa hôm nay</h3>
+      <div className="container">
+        <h3>Danh sách máy in</h3>
         <table
           className="table"
           style={{ borderCollapse: "collapse", width: "100%" }}
@@ -51,6 +46,7 @@ const Trang_chu = () => {
               <th scope="col">Rulo</th>
               <th scope="col">Ngày báo kẹt giấy</th>
               <th scope="col">Chú thích</th>
+              <th scope="col">#</th>
             </tr>
           </thead>
           <tbody>
@@ -64,6 +60,9 @@ const Trang_chu = () => {
                   <td>{printer.Rulo}</td>
                   <td>{printer.Date_test}</td>
                   <td>{printer.Note}</td>
+                      <td>
+                          <button className="btn btn-success"><a>Chi tiết</a></button>
+                  </td>
                   {/* <td>{new Date(printer.created_at).toLocaleString()}</td> */}
                 </tr>
               ))
@@ -76,46 +75,9 @@ const Trang_chu = () => {
             )}
           </tbody>
         </table>
-
-        {/* <h3>Danh sách mực in sửa hôm nay</h3>
-        <table
-          className="table"
-          style={{ borderCollapse: "collapse", width: "100%" }}
-        >
-          <thead>
-            <tr>
-              <th scope="col">ID</th>
-              <th scope="col">Mực in</th>
-              <th scope="col">Kho</th>
-              <th scope="col">Ngày bơm mực</th>
-              <th scope="col">Drum</th>
-              <th scope="col">Chú thích</th>
-            </tr>
-          </thead>
-          <tbody>
-            {inks && inks.length > 0 ? (
-              inks.map((printing: any) => (
-                <tr key={printing.id}>
-                  <th scope="row">{printing.id}</th>
-                  <td>{printing.So_muc}</td>
-                  <td>{printing.Kho}</td>
-                  <td>{printing.Bom_muc}</td>
-                  <td>{printing.Drum}</td>
-                  <td>{printing.Note}</td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td scope="row" colSpan={3}>
-                  Không có dữ liệu
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table> */}
       </div>
     </>
   );
 };
 
-export default Trang_chu;
+export default Printer;
